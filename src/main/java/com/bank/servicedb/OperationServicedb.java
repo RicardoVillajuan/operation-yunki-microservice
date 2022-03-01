@@ -1,6 +1,7 @@
 package com.bank.servicedb;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import com.bank.model.Operation;
@@ -46,8 +47,11 @@ public class OperationServicedb implements IOperationService{
 		
 	}
 	
-	/*@KafkaListener(topics = "topico")
-    public void consumeMessage(String message){
-        System.out.println("Received Message: " + message);
-    }*/
+	@KafkaListener(topics = "yunkisubmit")
+    public void consumeMessage(String ddd){
+        System.out.println("consumidor operation :"+ddd);
+        
+        sendMessage("PAso por operation");
+    }
+	
 }
