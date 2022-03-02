@@ -3,13 +3,15 @@ package com.bank.controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bank.model.Operation;
-
+import com.bank.model.Yunki;
 import com.bank.servicedb.OperationServicedb;
 
 import lombok.RequiredArgsConstructor;
+import reactor.core.publisher.Mono;
 
 
 @RestController
@@ -21,16 +23,15 @@ public class OperationController {
 	
 	private final OperationServicedb serviceOperation;
 	
-	@PostMapping
+	/*@PostMapping
 	public void send(@RequestBody Operation operation){
 		
-		serviceOperation.sendMessage(operation.getPhonenumbersubmit());
-	}
+		serviceOperation.sendMessage(operation);
+	}*/
 	
-	/*@PostMapping
-	@ResponseStatus(HttpStatus.CREATED)
-	public Mono<AccountYunki> send(@RequestBody Operation operation){
+	@PostMapping
+	public Mono<Yunki> send(@RequestBody Operation operation){
 		
 		return serviceOperation.send(operation);
-	}*/
+	}
 }

@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class AccountYunki {
+public class Yunki {
 	
 	private String id;
 	private String phonenumber;

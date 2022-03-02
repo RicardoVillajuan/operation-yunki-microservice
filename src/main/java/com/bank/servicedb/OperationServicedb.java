@@ -1,11 +1,16 @@
 package com.bank.servicedb;
 
+import java.io.Console;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.kafka.support.converter.JsonMessageConverter;
+import org.springframework.kafka.support.converter.RecordMessageConverter;
 import org.springframework.stereotype.Service;
 import com.bank.model.Operation;
-import com.bank.model.AccountYunki;
+import com.bank.model.Yunki;
 import com.bank.service.IOperationService;
 import reactor.core.publisher.Mono;
 
@@ -19,39 +24,31 @@ public class OperationServicedb implements IOperationService{
 	
 	
 	@Override
-	public Mono<AccountYunki> send(Operation operation) {
+	public Mono<Yunki> send(Operation operation) {
 		// TODO Auto-generated method stub
-		Mono<AccountYunki> accountsubmit=null;// aca va la consulta ala entidad account tunki
-		Mono<AccountYunki> accountreceive=null;// aca va la consulta ala entidad account tunki
+		Mono<Yunki> accountsubmit=null;// aca va la consulta ala entidad account tunki
+		Mono<Yunki> accountreceive=null;// aca va la consulta ala entidad account tunki
 		
-		return accountsubmit.doOnNext(as->{
-			if(as.getBalance() < operation.getBalance())
-				throw new RuntimeException("Usted no cuenta con el saldo disponible para el envio");
-		}).flatMap(as->{
-			return accountreceive.flatMap(ar->{
+		
 				
-				ar.setBalance(ar.getBalance()+operation.getBalance());
-				as.setBalance(ar.getBalance()-operation.getBalance());
-				//repoweb.updateAccount(as.getId(), as).subscribe();
-				
-				//productorKafka.send(ar);
-				
-				
-				return null;
-			});
-		});
+		//ar.setBalance(ar.getBalance()+operation.getBalance());
+		//as.setBalance(ar.getBalance()-operation.getBalance());
+		return null;
 	}
 	
-	public void sendMessage(String operation) {
-		kafkaTemplate.send("yunki", operation);
+	//Entidad operacion
+	//Enviamos el id a travez de kafka
+	public void sendMessage(Operation operation) {
+		//estamos enviando un string
+		kafkaTemplate.send("yunki", operation.getPhonenumbersubmit());
 		
 	}
 	
-	@KafkaListener(topics = "yunkisubmit")
-    public void consumeMessage(String ddd){
-        System.out.println("consumidor operation :"+ddd);
-        
-        sendMessage("PAso por operation");
+	@KafkaListener(topics = "enviocuatro")
+    public void consumeMessage(Yunki yunki){
+        //recibir el objeto
+        System.out.println("---------------"+yunki.toString());      
     }
+	
 	
 }
