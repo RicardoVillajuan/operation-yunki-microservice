@@ -40,6 +40,11 @@ public class OperationServicedb implements IOperationService{
     public void consumeMessage(Yunki yunki){
         //recibir el objeto
         System.out.println("---------------"+yunki.toString()); 
+        System.out.println("---------------"+yunki.toString()); 
+        System.out.println("---------------"+yunki.toString()); 
+        System.out.println("---------------"+yunki.toString()); 
+        System.out.println("---------------"+yunki.toString()); 
+        System.out.println("---------------"+yunki.toString()); 
         
     }
 	
