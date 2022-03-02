@@ -23,15 +23,15 @@ public class OperationController {
 	
 	private final OperationServicedb serviceOperation;
 	
+	@PostMapping
+	public void send(@RequestBody Operation operation){
+		
+		serviceOperation.sendConsultAccount(operation);
+	}
+	
 	/*@PostMapping
 	public void send(@RequestBody Operation operation){
 		
-		serviceOperation.sendMessage(operation);
+		serviceOperation.sendConsultAccount(operation);
 	}*/
-	
-	@PostMapping
-	public Mono<Yunki> send(@RequestBody Operation operation){
-		
-		return serviceOperation.send(operation);
-	}
 }
